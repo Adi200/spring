@@ -40,4 +40,8 @@ public class MainService {
 
     }
 
+    public void deleteCompetition(Long competitionId){
+        competitionRepository.delete(competitionId);
+    }
+
 }

@@ -28,12 +28,12 @@ public class CompetitionController {
     MainService mainService;
 
 
-    @RequestMapping(value="/competition/add",method=RequestMethod.POST)
-    public @ResponseBody String addCompetition(@RequestBody CompetitionDTO competition){
+    @RequestMapping(value = "/competition/add", method = RequestMethod.POST)
+    public @ResponseBody
+    String addCompetition(@RequestBody CompetitionDTO competition) {
         mainService.addCompetition(competition);
-        return "ok";
+        return "Competition added!";
     }
-
 
 //    @RequestMapping(value = "/getCompetitionDAO")
 //    public ResponseEntity<CompetitionDAO> get() {
@@ -56,42 +56,39 @@ public class CompetitionController {
 //        return new ResponseEntity<CompetitionDAO>(competition, HttpStatus.OK);
 //    }
 
-    @RequestMapping(value = "/competition/get", method =RequestMethod.GET)
-    public CompetitionDAO greeting(@RequestParam(value="Id") Long id) {
+    @RequestMapping(value = "/competition/get", method = RequestMethod.GET)
+    public CompetitionDAO getCompetition(@RequestParam(value = "Id") Long id) {
         return competitionRepository.findOne(id);
     }
 
-    @RequestMapping(value="/competition/delete", method=RequestMethod.DELETE)
-    public CompetitionDAO delete(@RequestParam(value="Id") Long id) {
-        //competitionRepository.delete(id);
-        return null;
+    @RequestMapping(value = "/competition/delete", method = RequestMethod.DELETE)
+    public String deleteCompetition(@RequestParam(value = "Id") Long id) {
+        mainService.deleteCompetition(id);
+        return "Competition deleted!";
     }
 
-
-    @RequestMapping(value="/xxxx", method=RequestMethod.GET)
-    public CompetitionDAO doStuff() {
-        CompetitionDAO x = new CompetitionDAO();
-        //userRepository.findAll();
-        return x;
-    }
-
-    @RequestMapping(value="/xxx", method=RequestMethod.GET)
-    public Collection<CompetitionDAO> competititionsToArrayList(){
-        Collection<CompetitionDAO> arrayListOfCompetitions= new ArrayList<CompetitionDAO>();
-        arrayListOfCompetitions=makeCollection(competitionRepository.findAll());
-
-        return arrayListOfCompetitions;
-    }
-
-
-
-    public static  Collection<CompetitionDAO> makeCollection(Iterable<CompetitionDAO> iter) {
-        Collection<CompetitionDAO> list = new ArrayList<CompetitionDAO>();
-        for (CompetitionDAO item : iter) {
-            list.add(item);
-        }
-        return list;
-    }
-
-
+//    @RequestMapping(value="/xxxx", method=RequestMethod.GET)
+//    public CompetitionDAO doStuff() {
+//        CompetitionDAO x = new CompetitionDAO();
+//        //userRepository.findAll();
+//        return x;
+//    }
+//
+//    @RequestMapping(value="/xxx", method=RequestMethod.GET)
+//    public Collection<CompetitionDAO> competititionsToArrayList(){
+//        Collection<CompetitionDAO> arrayListOfCompetitions= new ArrayList<CompetitionDAO>();
+//        arrayListOfCompetitions=makeCollection(competitionRepository.findAll());
+//
+//        return arrayListOfCompetitions;
+//    }
+//
+//
+//
+//    public static  Collection<CompetitionDAO> makeCollection(Iterable<CompetitionDAO> iter) {
+//        Collection<CompetitionDAO> list = new ArrayList<CompetitionDAO>();
+//        for (CompetitionDAO item : iter) {
+//            list.add(item);
+//        }
+//        return list;
+//    }
 }
