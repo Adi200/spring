@@ -26,8 +26,10 @@ public class CompetitionDAO {
     private Long id;
     private String name;
     private String date;
+    private String location;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "id")
+    @OneToMany(fetch = FetchType.LAZY)
+    @JoinColumn(name="id")
     private Set<ParticipantDAO>  participants = new HashSet<ParticipantDAO>(0);
 
     public Long getId() {
@@ -56,6 +58,13 @@ public class CompetitionDAO {
         this.date = date;
     }
 
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
     public Set<ParticipantDAO> getParticipants() {
         return participants;
@@ -75,6 +84,7 @@ public class CompetitionDAO {
         competition.setId(getId());
         competition.setName(getName());
         competition.setDate(getDate());
+        competition.setLocation(getLocation());
         return competition;
     }
 
@@ -83,7 +93,14 @@ public class CompetitionDAO {
         participant.setId(competitionDto.getId());
         participant.setName(competitionDto.getName());
         participant.setDate(competitionDto.getDate());
+        participant.setLocation(competitionDto.getLocation());
         return participant;
+    }
+
+    public boolean isBucharest(String city){
+        if(city.equals("Bucharest"))
+            return true;
+    return false;
     }
 
 }

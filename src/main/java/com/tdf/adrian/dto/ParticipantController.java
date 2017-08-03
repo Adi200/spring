@@ -1,6 +1,7 @@
 package com.tdf.adrian.dto;
 
 
+import com.tdf.adrian.dao.ParticipantDAO;
 import com.tdf.adrian.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -16,10 +17,14 @@ public class ParticipantController {
     @Autowired
     MainService mainService;
 
+    ParticipantDAO participant=new ParticipantDAO();
+
     @RequestMapping(value="/participant/add",method=RequestMethod.POST)
     public @ResponseBody String addParticipant(@RequestParam(value="Id") Long id, @RequestBody ParticipantDTO JSONparticipant ){
+        if(participant.pTypeValidation(JSONparticipant.getType())){
         mainService.addParticipant(JSONparticipant, id);
-        return "ok";
+        return "Participant added!";}
+        return "Wrong type!";
     }
 
     @RequestMapping(value="/participant/delete", method=RequestMethod.DELETE)

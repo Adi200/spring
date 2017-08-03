@@ -13,6 +13,7 @@ public class CompetitionDTO {
     private Long id;
     private String name;
     private String date;
+    private String location;
     private Set<ParticipantDAO> participants = new HashSet<ParticipantDAO>(0);
 
     public Long getId() {
@@ -37,6 +38,14 @@ public class CompetitionDTO {
 
     public void setDate(String date) {
         this.date = date;
+    }
+
+    public String getLocation() {
+        return location;
+    }
+
+    public void setLocation(String location) {
+        this.location = location;
     }
 
     public Set<ParticipantDAO> getParticipants() {

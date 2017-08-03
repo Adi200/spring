@@ -2,30 +2,28 @@ package com.tdf.adrian.dao;
 
 import com.tdf.adrian.dto.ParticipantDTO;
 import javax.persistence.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.zip.DataFormatException;
 
 /**
  * Created by User on 7/26/2017.
  */
 @Entity
 @Table(name = "Participants", catalog = "competitions")
-//@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property = "id")
 public class ParticipantDAO {
 
 
     private Long id;
     private String name;
     private int number;
-    //private boolean flag;
-    private String dateOfBirth;
+    private Date dateOfBirth;
     private ParticipantType type;
 
-//    public Integer getId() {
-//        return id;
-//    }
-//
-//    public void setId(Integer id) {
-//        this.id = id;
-//    }
 
     public String getName() {
         return name;
@@ -43,19 +41,12 @@ public class ParticipantDAO {
         this.number = number;
     }
 
-//    public boolean isFlag() {
-//        return flag;
-//    }
-//
-//    public void setFlag(boolean flag) {
-//        this.flag = flag;
-//    }
 
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 
@@ -70,6 +61,7 @@ public class ParticipantDAO {
         this.id = id;
     }
 
+    @Enumerated(EnumType.STRING)
     public ParticipantType getType() {
         return type;
     }
@@ -89,6 +81,7 @@ public class ParticipantDAO {
     }
 
     public static ParticipantDAO fromDTO(ParticipantDTO participantDto){
+
         ParticipantDAO participant= new ParticipantDAO();
         participant.setId(participantDto.getId());
         participant.setName(participantDto.getName());
@@ -97,4 +90,15 @@ public class ParticipantDAO {
         participant.setType(participantDto.getType());
         return participant;
     }
+
+    public boolean pTypeValidation(ParticipantType type){
+        switch (type){
+            case ACTIVE:return true;
+            case MEDIUM:return true;
+            case LOW:return false;
+        }
+
+        return false;
+    }
+
 }

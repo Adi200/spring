@@ -6,6 +6,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import java.time.LocalDate;
+import java.util.Date;
 
 /**
  * Created by User on 7/26/2017.
@@ -16,9 +18,7 @@ public class ParticipantDTO {
     private Long id;
     private String name;
     private int number;
-    private boolean flag;
-    private String dateOfBirth;
-  //  private String specialAttribute;
+    private Date dateOfBirth;
     private ParticipantType type;
 
     public String getName() {
@@ -37,38 +37,14 @@ public class ParticipantDTO {
         this.number = number;
     }
 
-    public boolean isFlag() {
-        return flag;
-    }
 
-    public void setFlag(boolean flag) {
-        this.flag = flag;
-    }
-
-    public String getDateOfBirth() {
+    public Date getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(String dateOfBirth) {
+    public void setDateOfBirth(Date dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
-
-//    public String getSpecialAttribute() {
-//        return specialAttribute;
-//    }
-//
-//    public void setSpecialAttribute(String specialAttribute) {
-//        this.specialAttribute = specialAttribute;
-//    }
-
-//    public String getCompetition() {
-//        return competition;
-//    }
-//
-//    public void setCompetition(String competition) {
-//        this.competition = competition;
-//    }
-
 
     public Long getId() {
         return id;

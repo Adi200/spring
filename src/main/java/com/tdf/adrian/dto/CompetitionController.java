@@ -3,6 +3,7 @@ package com.tdf.adrian.dto;
 
 import com.tdf.adrian.dao.CompetitionDAO;
 import com.tdf.adrian.dao.CompetitionRepository;
+import com.tdf.adrian.dao.ParticipantDAO;
 import com.tdf.adrian.dto.CompetitionDTO;
 import com.tdf.adrian.service.MainService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,7 +20,7 @@ import java.util.Set;
 
 @RestController
 public class CompetitionController {
-    CompetitionDAO competition = new CompetitionDAO();
+    CompetitionDAO competitionObj = new CompetitionDAO();
 
     @Autowired
     private CompetitionRepository competitionRepository;
@@ -31,8 +32,10 @@ public class CompetitionController {
     @RequestMapping(value = "/competition/add", method = RequestMethod.POST)
     public @ResponseBody
     String addCompetition(@RequestBody CompetitionDTO competition) {
+        if(competitionObj.isBucharest(competition.getLocation())){
         mainService.addCompetition(competition);
-        return "Competition added!";
+        return "Competition added!";}
+        return "Wrong location!";
     }
 
 //    @RequestMapping(value = "/getCompetitionDAO")
